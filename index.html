@@ -5,9 +5,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Team Generator</title>
-	<script src="scripts/randomsplit.js"></script>
+	<script defer src="scripts/randomsplit.js"></script>
 </head>
 <body>
+	<h1>Team Generator</h1>
+
+		<label>Enter player name</label>
+		<input type ="text" id ="enterName" />
+		<button id ="submitName" type="button">Add Player</button>
+		<button id ="generate" type="button">Generate Teams</button>
+
+		<div id ="output"></div>
+		<div id ="playerPool"></div>
+		<div id ="homeTeam"></div>
+		<div id ="awayTeam"></div>
 	
 </body>
 </html>
