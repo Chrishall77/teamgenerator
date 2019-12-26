@@ -1,7 +1,11 @@
+//generate a random integer below the max permissable value
 function generateRandom(min, max) {
     return Math.ceil( Math.random() * ( max - min ) );
 }
 
+//populate array with random integers
+//test that integer does not already exist
+//return array
 function generatePlayerIndex(players) {
     let playerNumbers = [];
     while ( playerNumbers.length < players ) {
@@ -13,6 +17,8 @@ function generatePlayerIndex(players) {
     return playerNumbers;
 }
 
+// declare pool array of players - note this will be refactored to accept user input
+// loop through random player Index pool and push odd numbers to blue and even numbers to red
 function teamSplitter() {
     let pool = [
         "Jack Daniels",
