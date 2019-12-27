@@ -18,6 +18,7 @@
     //New Player button listener
     //adds name if array length below pool maximum
     //display pool
+    //clear blanks
     submitName.addEventListener("click", () => {
         pool.length < 10 ? pool.push(enterName.value) : output.textContent = "Pool full";
         playerPool.textContent = pool;
