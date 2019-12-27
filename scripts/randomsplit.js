@@ -21,6 +21,7 @@
     submitName.addEventListener("click", () => {
         pool.length < 10 ? pool.push(enterName.value) : output.textContent = "Pool full";
         playerPool.textContent = pool;
+        enterName.value = "";
     })
 
     //Generate Teams button listener
