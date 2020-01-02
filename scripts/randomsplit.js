@@ -1,7 +1,7 @@
  
  ((d) => {
     
-    //create Player constructor class
+    //create Player object constructor 
     class Player {
         constructor(name, rating) {
             this.name = name
@@ -23,7 +23,10 @@
     let away = [];
     let homeRating = [];
     let awayRating = [];
-    let history = [];
+
+    //initialise team rating
+    let homeScore = 0;
+    let awayScore = 0;
 
     //initialise booleans
     let balance = false;
@@ -37,6 +40,8 @@
     let homeTeam = d.getElementById("homeTeam");
     let awayTeam = d.getElementById("awayTeam");
     let playerPool = d.getElementById("playerPool");
+
+    //initialise reducer for team ratings
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     //New Player button listener
@@ -45,23 +50,33 @@
     //clear input field
     submitName.addEventListener("click", () => {
         if ( pool.length < 10 ) {
+            let inputName = enterName.value ? enterName.value : "Player";
+            let inputRating = enterRating.value ? enterRating.value : "1";
             let newPlayer = new Player(
-                enterName.value,
-                enterRating.value
+                inputName,
+                inputRating,
             );
+            let content = newPlayer.getName() + " / " + newPlayer.getRating();
+            populateSection(playerPool, "P", content);
             pool.push(newPlayer);
+            enterName.value = "";
+            enterName.focus();
         } else {
             output.textContent = "Pool full";
+            generate.focus();
         }
-
-        playerPool.textContent = pool;
-        enterName.value = "";
     })
 
     //Generate Teams button listener
     //calls teamsplitter function
     generate.addEventListener("click", ()=>{
-        teamSplitter();
+        if (pool.length === 10) {
+            output.textContent = "";
+            teamSplitter();
+        } else {
+            let remaining = 10 - pool.length;
+            output.textContent = "You need " + remaining + " more players.";
+        }  
     })
 
     //function to enable differences to be found when either number may be higher
@@ -71,7 +86,7 @@
         } else {
           return num2 - num1
         }
-      }
+    }
 
     //generate a random integer below the max permissable value
     function generateRandom(min, max) {
@@ -89,76 +104,86 @@
             playerNumbers.push(newIndex);
         }
     }
-        console.log(playerNumbers);
         return playerNumbers;
     }
     
     //assign randomly generated index to new array
-    //push to home or away based on whether the index is odd or even
+    //split in half to populate home and away teams
     //re-calculate if difference between team is too wide
     //output teams to page
     function teamSplitter() {
-
         //loop checks if balance between teams has been enabled
         while ( balance == false ) {
-
             //return variables/arrays to initial values
             home = [];
             away = [];
-            let homeScore = 0;
-            let awayScore = 0;
+            homeScore = 0;
+            awayScore = 0;
             teamDifference = 0;
             homeRating = [];
             awayRating = [];
 
-
+            //generate teams from randomised Player Index
             let playerIndex = generatePlayerIndex(pool.length);
-            
             for ( i = 0; i < (pool.length); i++ ) {
                 home.push(pool[playerIndex[i]]);
             }
-
             away = home.splice(0, 5);
             
             //store player rating for each team in array
-            home.forEach((home)=>homeRating.push(+home.rating));
-            away.forEach((away)=>awayRating.push(+away.rating));
-            console.log("Home: " + home);
-            console.log("Away: " + away);
+            home.forEach((home)=>homeRating.push(+home.getRating()));
+            away.forEach((away)=>awayRating.push(+away.getRating()));
 
             //reduce to a single value the ratings for each team
             homeScore = Math.floor(homeRating.reduce(reducer));
             awayScore = Math.floor(awayRating.reduce(reducer));
-            console.log("HomeScore: " + homeScore);
-            console.log("AwayScore: " + awayScore);
-            console.log(difference(homeScore, awayScore));
 
             //2 is the tipping point as it is the difference between 1 and 3
             //set loop exit variable to true
             if ( difference(homeScore, awayScore ) <= 2 ) {
                 balance = true;
-                console.log(history);
             } else {
-                history.push(playerIndex);
                 playerIndex = [];
             }
-
         }
-
-       homeTeam.textContent = home;
-       home.forEach((home)=>console.log("Home: " + home.name,home.rating));
-       
-       console.log(homeRating.reduce(reducer));
-       away.forEach((away)=>console.log("Away: " + away.name,away.rating));
-       
-       awayTeam.textContent = away;
-       console.log(homeRating);
-       console.log(awayRating);
-       console.log("Home Team rating: " + homeRating.reduce(reducer));
-       console.log("Away Team rating : " + awayRating.reduce(reducer));
-       console.log(history);
+        createPage();
     }
 
+    function createPage() {
+
+        clearSection(playerPool);
+       
+        populateSection(homeTeam, "H2", "Home");
+        home.forEach((home)=>populateSection(homeTeam, "P", home.getName() + " / " + home.getRating() ));
+        populateSection(homeTeam, "H3", "Team Rating: " + homeScore)
+        
+        populateSection(awayTeam, "H2", "Away");
+        away.forEach((away)=>populateSection(awayTeam, "P", away.getName() + " / " + away.getRating() ));
+        populateSection(awayTeam, "H3", "Team Rating: " + awayScore);
+
+        consoleLogs();
+    }
+
+     function populateSection(section, element, content) {
+        let para = document.createElement(element);                     // Create an element node
+        let t = document.createTextNode(content);                       // Create a content node
+        para.appendChild(t);                                            // Append the content to element
+        section.appendChild(para);                                      // Append element to section 
+    }
+
+    function clearSection(section) {
+        while(section.firstChild){
+            section.removeChild(section.firstChild);
+        }
+    }
+
+   function consoleLogs() {
+        pool.forEach((player)=>console.log(player.getName() + " / " + player.getRating()));
+        console.log(homeRating);
+        console.log(awayRating);
+        console.log("Home Team rating: " + homeRating.reduce(reducer));
+        console.log("Away Team rating : " + awayRating.reduce(reducer));
+   }
     
 })(document)
  
