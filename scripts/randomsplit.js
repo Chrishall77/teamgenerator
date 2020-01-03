@@ -34,6 +34,7 @@
     let stepThree = d.getElementById("stepThree");
     let generator = d.getElementById("generator");
     let prepTeam = d.getElementById("prepTeam");
+    let reset = d.getElementById("reset");
 
     //initialise arrays
     let pool = [];
@@ -61,10 +62,15 @@
         console.log(poolSize);
     })
 
+    //handler for resetting app
+    reset.addEventListener("click", ()=> {
+        document.location.reload(true);
+    })
+
     //New Player button listener
     //adds name as new object if array length below pool maximum
     //display pool full when maximum reached
-    //clear input field
+    //clear input field and set focus back to it
     submitName.addEventListener("click", () => {
         if ( pool.length < poolSize ) {
             let count = pool.length;
@@ -78,6 +84,7 @@
             playerPool.className = "card bg-light border-dark";
             populateSection(playerPool, "P", content);
             pool.push(newPlayer);
+            remianers();
             enterName.value = "";
             enterName.focus();
         } else {
@@ -89,6 +96,7 @@
 
     //Generate Teams button listener
     //calls teamsplitter function
+    //if pool not yet full then display remaining number of players needed
     generate.addEventListener("click", ()=>{
         if (pool.length === +poolSize) {
             stepThree.textContent = "";
