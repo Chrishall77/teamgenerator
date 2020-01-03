@@ -50,7 +50,8 @@
     //clear input field
     submitName.addEventListener("click", () => {
         if ( pool.length < 10 ) {
-            let inputName = enterName.value ? enterName.value : "Player";
+            let count = pool.length;
+            let inputName = enterName.value ? enterName.value : "Player " + (count + 1);
             let inputRating = enterRating.value ? enterRating.value : "1";
             let newPlayer = new Player(
                 inputName,
