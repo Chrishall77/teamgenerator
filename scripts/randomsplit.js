@@ -62,7 +62,7 @@
         console.log(poolSize);
     })
 
-    //handler for resetting app
+    //handler for resetting to start
     reset.addEventListener("click", ()=> {
         document.location.reload(true);
     })
@@ -84,7 +84,7 @@
             playerPool.className = "card bg-light border-dark";
             populateSection(playerPool, "P", content);
             pool.push(newPlayer);
-            remianers();
+            remainers();
             enterName.value = "";
             enterName.focus();
         } else {
@@ -108,8 +108,8 @@
 
     function remainers() {
         let remaining = poolSize - pool.length;
-        stepThree.className = "alert alert-warning";
-        stepThree.textContent = "You need " + remaining + " more players.";
+        stepTwo.className = "alert alert-warning";
+        stepTwo.textContent = "You need " + remaining + " more players.";
     }
 
     //function to enable differences to be found when either number may be higher
