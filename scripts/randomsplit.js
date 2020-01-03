@@ -17,21 +17,9 @@
         }
     }
 
-    //initialise arrays
-    let pool = [];
-    let home = [];
-    let away = [];
-    let homeRating = [];
-    let awayRating = [];
-
-    //initialise team rating
-    let homeScore = 0;
-    let awayScore = 0;
-
-    //initialise booleans
-    let balance = false;
-
     //initialise document elements
+    let enterPoolSize = d.getElementById("enterPoolSize");
+    let submitPoolSize = d.getElementById("submitPoolSize");
     let enterName = d.getElementById("enterName");
     let enterRating = d.getElementById("enterRating");
     let submitName = d.getElementById("submitName");
@@ -41,15 +29,36 @@
     let awayTeam = d.getElementById("awayTeam");
     let playerPool = d.getElementById("playerPool");
 
+    //initialise arrays
+    let pool = [];
+    let home = [];
+    let away = [];
+    let homeRating = [];
+    let awayRating = [];
+
+    //initialise team rating and poolsize
+    let homeScore = 0;
+    let awayScore = 0;
+    let poolSize = 10;
+    
+    //initialise booleans
+    let balance = false;
+
     //initialise reducer for team ratings
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+    //Handler for setting team size button
+    submitPoolSize.addEventListener("click", () =>{
+        poolSize = enterPoolSize.value;
+        console.log(poolSize);
+    })
 
     //New Player button listener
     //adds name as new object if array length below pool maximum
     //display pool full when maximum reached
     //clear input field
     submitName.addEventListener("click", () => {
-        if ( pool.length < 10 ) {
+        if ( pool.length < poolSize ) {
             let count = pool.length;
             let inputName = enterName.value ? enterName.value : "Player " + (count + 1);
             let inputRating = enterRating.value ? enterRating.value : "1";
@@ -71,11 +80,11 @@
     //Generate Teams button listener
     //calls teamsplitter function
     generate.addEventListener("click", ()=>{
-        if (pool.length === 10) {
+        if (pool.length === +poolSize) {
             output.textContent = "";
             teamSplitter();
         } else {
-            let remaining = 10 - pool.length;
+            let remaining = poolSize - pool.length;
             output.textContent = "You need " + remaining + " more players.";
         }  
     })
@@ -129,7 +138,7 @@
             for ( i = 0; i < (pool.length); i++ ) {
                 home.push(pool[playerIndex[i]]);
             }
-            away = home.splice(0, 5);
+            away = home.splice(0, poolSize/2);
             
             //store player rating for each team in array
             home.forEach((home)=>homeRating.push(+home.getRating()));
