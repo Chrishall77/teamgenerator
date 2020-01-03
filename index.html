@@ -1,74 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>5-A-Side Team Generator</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script defer src="scripts/randomsplit.js"></script>
 </head>
-<body>
-	<header class="container">
-		<h1>Team Generator</h1>
-	</header>
-	
-	<main class="container" id="prepTeams">
-		
-			<div class="form-group" id="setPoolSize">
-				<div class="alert alert-danger" role="alert" id="stepOne">
-					Step 1: Set your team size (max 11). 
-				</div>
-				<label for="enterPoolSize">Select team size</label>
-				<select class="form-control" id = "enterPoolSize">
-					<option value="10">5-A-Side</option>
-					<option value="12">6-A-Side</option>
-					<option value="14">7-A-Side</option>
-					<option value="16">8-A-Side</option>
-					<option value="18">9-A-Side</option>
-					<option value="20">10-A-Side</option>
-					<option value="22">11-A-Side</option>
-				</select>
-				<button id ="submitPoolSize" type="button" class="btn btn-primary">Set Team Size</button>
-			</div>
 
-			<div class="form-group" id="setPlayerNames">
-				<div class="alert alert-danger" role="alert" id="stepTwo">
-					Step 2: Enter your player names and ratings.
-				</div>
-				<label for="enterName">Enter player name</label>
-				<input type ="text" class="form-control" id ="enterName" placeholder="defaults to Player 1 etc..."/>
-			</div>
+<body class="bg-secondary">
 
-			<div class="form-group" id="setRatings">
-				<label for="enterRating">Select player rating</label>
-				<select class="form-control" id = "enterRating">
-					<option value="1">1 - Beginner</option>
-					<option value="2">2 - Intermediate</option>
-					<option value="3">3 - Advanced</option>
-				</select> 
-				<button id ="submitName" type="button" class="btn btn-primary">Add Player</button>
-				<div id ="output"></div>
-			</div>
-			
-			<div id="generator">
-				<div class="alert alert-danger" role="alert" id="stepThree">
-					Step 3! Generate squads (balanced to within a maximum of 2 rating points)
+	<heading class="navbar navbar-expand-md navbar-dark" style="background-color: #E21A23;;">
+		<img src="http://www.slim2win.org/images/bristol_city_fc_logo_a.png" width="60" height="60"
+			class="d-none d-lg-inline-block align-center mr-2" alt="Robins">
+		<img src="http://www.slim2win.org/images/slim2winlogo.jpg" class="d-inline-block align-center mr-2 rounded"
+			alt="Slim2Win logo">
+		<h1>Friendly Fixtures Squad Generator</h1>
+	</heading>
+
+	<main class="container mt-3">
+		<section class="card border-dark" id="prepTeam">
+			<div class="card-body">
+				<div class="form-group" id="setPoolSize">
+					<div class="alert alert-danger" role="alert" id="stepOne">
+						Step 1: Set your team size (max 11).
+					</div>
+					<label for="enterPoolSize">Select team size</label>
+					<select class="form-control" id="enterPoolSize">
+						<option value="10">5-A-Side</option>
+						<option value="12">6-A-Side</option>
+						<option value="14">7-A-Side</option>
+						<option value="16">8-A-Side</option>
+						<option value="18">9-A-Side</option>
+						<option value="20">10-A-Side</option>
+						<option value="22">11-A-Side</option>
+					</select>
 				</div>
 
-				<button id ="generate" type="button" class="btn btn-primary">Generate Teams</button>
+				<div class="form-group" id="setPlayerNames">
+					<div class="alert alert-danger" role="alert" id="stepTwo">
+						Step 2: Enter your player names and ratings.
+					</div>
+					<label for="enterName">Enter player name</label>
+					<input type="text" class="form-control" id="enterName" placeholder="defaults to Player 1 etc..." />
+				</div>
+
+				<div class="form-group" id="setRatings">
+					<label for="enterRating">Select player rating</label>
+					<select class="form-control" id="enterRating">
+						<option value="1">1 - Beginner</option>
+						<option value="2">2 - Intermediate</option>
+						<option value="3">3 - Advanced</option>
+					</select>
+					<button id="submitName" type="button" class="btn btn-primary mt-3">Add Player</button>
+				</div>
+
+				<div id="generator">
+					<div class="alert alert-danger" role="alert" id="stepThree">
+						Step 3! Generate squads (balanced to within a maximum of 2 rating points)
+					</div>
+
+					<button id="generate" type="button" class="btn btn-primary">Generate Teams</button>
+				</div>
 			</div>
-			
-			<div class="container" id ="playerPool"></div>
-	
-		
-			<div class="row" id="teams">
-					<div id ="homeTeam"></div>
-					<div id ="awayTeam"></div>
-			</div>
-			
-	</main>		
-			
-			
+		</section>
+
+
+		<div class="container" id="playerPool"></div>
+
+
+		<div class="row" id="teams">
+			<div id="homeTeam"></div>
+			<div id="awayTeam"></div>
+		</div>
+
+	</main>
+
+
 </body>
+
 </html>

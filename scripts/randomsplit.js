@@ -19,15 +19,21 @@
 
     //initialise document elements
     let enterPoolSize = d.getElementById("enterPoolSize");
-    let submitPoolSize = d.getElementById("submitPoolSize");
     let enterName = d.getElementById("enterName");
     let enterRating = d.getElementById("enterRating");
     let submitName = d.getElementById("submitName");
-    let output = d.getElementById("output");
     let generate = d.getElementById("generate");
     let homeTeam = d.getElementById("homeTeam");
     let awayTeam = d.getElementById("awayTeam");
     let playerPool = d.getElementById("playerPool");
+    let setPlayerNames = d.getElementById("setPlayerNames");
+    let setRatings = d.getElementById("setRatings");
+    let setPoolSize = d.getElementById("setPoolSize");
+    let stepOne = d.getElementById("stepOne");
+    let stepTwo = d.getElementById("stepTwo");
+    let stepThree = d.getElementById("stepThree");
+    let generator = d.getElementById("generator");
+    let prepTeam = d.getElementById("prepTeam");
 
     //initialise arrays
     let pool = [];
@@ -47,9 +53,11 @@
     //initialise reducer for team ratings
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
-    //Handler for setting team size button
-    submitPoolSize.addEventListener("click", () =>{
+    //Handler for setting team size
+    enterPoolSize.addEventListener("change", () => {
         poolSize = enterPoolSize.value;
+        stepOne.className = "alert alert-warning";
+        stepOne.textContent = "Squad Size: " + poolSize / 2 + " players.";
         console.log(poolSize);
     })
 
@@ -67,12 +75,14 @@
                 inputRating,
             );
             let content = newPlayer.getName() + " / " + newPlayer.getRating();
+            playerPool.className = "card bg-light border-dark";
             populateSection(playerPool, "P", content);
             pool.push(newPlayer);
             enterName.value = "";
             enterName.focus();
         } else {
-            output.textContent = "Pool full";
+            stepTwo.className = "alert alert-warning"; 
+            stepTwo.textContent = "Player pool full";
             generate.focus();
         }
     })
@@ -81,13 +91,18 @@
     //calls teamsplitter function
     generate.addEventListener("click", ()=>{
         if (pool.length === +poolSize) {
-            output.textContent = "";
+            stepThree.textContent = "";
             teamSplitter();
         } else {
-            let remaining = poolSize - pool.length;
-            output.textContent = "You need " + remaining + " more players.";
+            remainers();
         }  
     })
+
+    function remainers() {
+        let remaining = poolSize - pool.length;
+        stepThree.className = "alert alert-warning";
+        stepThree.textContent = "You need " + remaining + " more players.";
+    }
 
     //function to enable differences to be found when either number may be higher
     function difference (num1, num2) {
@@ -161,15 +176,23 @@
 
     function createPage() {
 
+        clearSection(setPoolSize);
+        clearSection(setPlayerNames);
+        clearSection(setRatings);
         clearSection(playerPool);
-       
-        populateSection(homeTeam, "H2", "Home");
-        home.forEach((home)=>populateSection(homeTeam, "P", home.getName() + " / " + home.getRating() ));
-        populateSection(homeTeam, "H3", "Team Rating: " + homeScore)
+        clearSection(generator);
+        clearSection(prepTeam);
+
+        homeTeam.className = "col card bg-light border-dark";
+        awayTeam.className = "col card bg-light border-dark";
         
-        populateSection(awayTeam, "H2", "Away");
+        populateSection(homeTeam, "H2", "Home Team");
+        home.forEach((home)=>populateSection(homeTeam, "P", home.getName() + " / " + home.getRating() ));
+        populateSection(homeTeam, "H4", "Rating: " + homeScore)
+        
+        populateSection(awayTeam, "H2", "Away Team");
         away.forEach((away)=>populateSection(awayTeam, "P", away.getName() + " / " + away.getRating() ));
-        populateSection(awayTeam, "H3", "Team Rating: " + awayScore);
+        populateSection(awayTeam, "H4", "Rating: " + awayScore);
 
         consoleLogs();
     }
@@ -182,6 +205,7 @@
     }
 
     function clearSection(section) {
+        section.className="";
         while(section.firstChild){
             section.removeChild(section.firstChild);
         }
