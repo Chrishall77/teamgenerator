@@ -70,7 +70,7 @@
     //New Player button listener
     //adds name as new object if array length below pool maximum
     //display pool full when maximum reached
-    //clear input field and set focus back to it
+    //clear input field and set focus back to it if there are players still to add
     submitName.addEventListener("click", () => {
         if ( pool.length < poolSize ) {
             let count = pool.length;
@@ -106,6 +106,7 @@
         }  
     })
 
+    //calculate and display remaining players required to meet pool size
     function remainers() {
         let remaining = poolSize - pool.length;
         stepTwo.className = "alert alert-warning";
@@ -182,6 +183,9 @@
         createPage();
     }
 
+    //create output after generation showing randomised balanced teams
+    //use clearsection and populate section calls to populate
+    //parameters extend the existing heading structure for accessibility purposes
     function createPage() {
 
         clearSection(setPoolSize);
@@ -196,22 +200,24 @@
         
         populateSection(homeTeam, "H2", "Home Team");
         home.forEach((home)=>populateSection(homeTeam, "P", home.getName() + " / " + home.getRating() ));
-        populateSection(homeTeam, "H4", "Rating: " + homeScore)
+        populateSection(homeTeam, "H3", "Rating: " + homeScore)
         
         populateSection(awayTeam, "H2", "Away Team");
         away.forEach((away)=>populateSection(awayTeam, "P", away.getName() + " / " + away.getRating() ));
-        populateSection(awayTeam, "H4", "Rating: " + awayScore);
+        populateSection(awayTeam, "H3", "Rating: " + awayScore);
 
-        consoleLogs();
+        reset.focus();
     }
 
+    // Populate sections by generating an element and attaching content to it
      function populateSection(section, element, content) {
-        let para = document.createElement(element);                     // Create an element node
-        let t = document.createTextNode(content);                       // Create a content node
-        para.appendChild(t);                                            // Append the content to element
-        section.appendChild(para);                                      // Append element to section 
+        let para = document.createElement(element);                     
+        let t = document.createTextNode(content);                       
+        para.appendChild(t);                                            
+        section.appendChild(para);                                       
     }
 
+    //Remove class info and remove content
     function clearSection(section) {
         section.className="";
         while(section.firstChild){
@@ -219,13 +225,5 @@
         }
     }
 
-   function consoleLogs() {
-        pool.forEach((player)=>console.log(player.getName() + " / " + player.getRating()));
-        console.log(homeRating);
-        console.log(awayRating);
-        console.log("Home Team rating: " + homeRating.reduce(reducer));
-        console.log("Away Team rating : " + awayRating.reduce(reducer));
-   }
-    
 })(document)
  
