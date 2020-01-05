@@ -13,75 +13,91 @@
 
 <body class="bg-secondary">
 
+	<!--Heading Section Displaying Slim2Win branding-->
 	<heading class="navbar navbar-expand-md navbar-dark" style="background-color: #E21A23;;">
 		<img src="http://www.slim2win.org/images/bristol_city_fc_logo_a.png" width="60" height="60"
 			class="d-none d-lg-inline-block align-center mr-2" alt="Robins">
-		<img src="http://www.slim2win.org/images/slim2winlogo.jpg" class="d-inline-block align-center mr-2 rounded"
+		<img src="http://www.slim2win.org/images/slim2winlogo.jpg" class="d-none d-md-inline-block align-center mr-2 rounded"
 			alt="Slim2Win logo">
-		<span class="navbar-brand mr-2 h1">Friendly Fixtures Team Generator</span>
+		<span class="navbar-brand mr-2"><h1>Friendly Fixtures Team Generator</h1></span>
 	</heading>
 
+	<!--Main section to house form elements-->
 	<main class="container mt-3">
+
+		<!--Section to Prepare Teams in Bootstrap Card-->
 		<section class="card border-dark" id="prepTeam">
 			<div class="card-body">
+
+				<!--STEP 1 FORM SECTION-->
 				<div class="form-group" id="setPoolSize">
 					<div class="alert alert-danger" role="alert" id="stepOne">
-						Step 1: Set your team size (max 11).
+						<h2>Step 1: Set your team size (max 11).</h2>
 					</div>
 					<label for="enterPoolSize">Select team size</label>
 					<select class="form-control" id="enterPoolSize">
-						<option value="10">5-A-Side</option>
-						<option value="12">6-A-Side</option>
-						<option value="14">7-A-Side</option>
-						<option value="16">8-A-Side</option>
-						<option value="18">9-A-Side</option>
-						<option value="20">10-A-Side</option>
-						<option value="22">11-A-Side</option>
+						<optgroup label="Team Sizes">
+							<option value="10">5-A-Side</option>
+							<option value="12">6-A-Side</option>
+							<option value="14">7-A-Side</option>
+							<option value="16">8-A-Side</option>
+							<option value="18">9-A-Side</option>
+							<option value="20">10-A-Side</option>
+							<option value="22">11-A-Side</option>
+						</optgroup>
 					</select>
 				</div>
 
+				<!--STEP TWO...ADD PLAYERS...-->
 				<div class="form-group" id="setPlayerNames">
 					<div class="alert alert-danger" role="alert" id="stepTwo">
-						Step 2: Enter your player names and ratings.
+						<h2>Step 2: Enter your player names and ratings.</h2>
 					</div>
 					<label for="enterName">Enter player name</label>
 					<input type="text" class="form-control" id="enterName" placeholder="defaults to Player 1 etc..." />
 				</div>
 
+				<!--...ENTER RATINGS -->
 				<div class="form-group" id="setRatings">
 					<label for="enterRating">Select player rating</label>
 					<select class="form-control" id="enterRating">
-						<option value="1">1 - Beginner</option>
-						<option value="2">2 - Intermediate</option>
-						<option value="3">3 - Advanced</option>
+						<optgroup label="Ratings">
+							<option value="1">1 - Beginner</option>
+							<option value="2">2 - Intermediate</option>
+							<option value="3">3 - Advanced</option>
+						</optgroup>
 					</select>
-					<button id="submitName" type="button" class="btn btn-primary mt-3">Add Player</button>
+					<button id="submitName" type="button" class="btn btn-primary mt-3" value="Add Player">Add Player</button>
 				</div>
 
+				<!--STEP THREE - GENERATE!-->
 				<div id="generator">
 					<div class="alert alert-danger" role="alert" id="stepThree">
-						Step 3! Generate squads (balanced to within a maximum of 2 rating points)
+						<h2>Step 3: Generate squads (balanced to within 2 rating points)</h2>
 					</div>
 
-					<button id="generate" type="button" class="btn btn-primary">Generate Teams</button>
+					<button id="generate" type="button" class="btn btn-primary" value="Generate Teams">Generate Teams</button>
 				</div>
 			</div>
 		</section>
 
-
+		<!--Container for PlayerPool-->
 		<div class="container" id="playerPool"></div>
 
 	</main>
 
+	<!--Footer Section-->
 	<footer class="container mt-3">
+		<!--Format Home and away teams as Bootstrap card-->
 		<section class="card border-dark">
 			<div class="card-body">
 				<div class="row" id="teams">
 					<div id="homeTeam"></div>
 					<div id="awayTeam"></div>
 				</div>
+				<!--Reset button-->
 				<div class="form-group text-center mt-3">
-					<button id="reset" type="button" class="btn btn-primary">Reset</button>
+					<button id="reset" type="button" class="btn btn-primary" value="Reset All Options">Reset</button>
 					<p class="text-muted">Warning! Pressing this will clear everything you've entered so far.</p>
 				</div>
 			</div>
