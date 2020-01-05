@@ -204,7 +204,7 @@
         
         populateSection(awayTeam, "H3", "Away Team");
         away.forEach((away)=>populateSection(awayTeam, "P", away.getName() + " / " + away.getRating() ));
-        populateSection(awayTeam, "H4", "Rating: " + awayScore);
+        populateSection(awayTeam, "H4g", "Rating: " + awayScore);
 
         reset.focus();
     }
