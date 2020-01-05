@@ -19,20 +19,20 @@
 			class="d-none d-lg-inline-block align-center mr-2" alt="Robins">
 		<img src="http://www.slim2win.org/images/slim2winlogo.jpg" class="d-none d-md-inline-block align-center mr-2 rounded"
 			alt="Slim2Win logo">
-		<span class="navbar-brand mr-2"><h1>Friendly Fixtures Team Generator</h1></span>
+		<span class="navbar-brand mr-2"><h1>Team Generator</h1></span>
 	</heading>
 
 	<!--Main section to house form elements-->
 	<main class="container mt-3">
-
 		<!--Section to Prepare Teams in Bootstrap Card-->
 		<section class="card border-dark" id="prepTeam">
 			<div class="card-body">
 
 				<!--STEP 1 FORM SECTION-->
 				<div class="form-group" id="setPoolSize">
+					<h2>Team Info</h2>
 					<div class="alert alert-danger" role="alert" id="stepOne">
-						<h2>Step 1: Set your team size (max 11).</h2>
+						<h3>Step 1: Set your team size (max 11).</h3>
 					</div>
 					<label for="enterPoolSize">Select team size</label>
 					<select class="form-control" id="enterPoolSize">
@@ -51,7 +51,7 @@
 				<!--STEP TWO...ADD PLAYERS...-->
 				<div class="form-group" id="setPlayerNames">
 					<div class="alert alert-danger" role="alert" id="stepTwo">
-						<h2>Step 2: Enter your player names and ratings.</h2>
+						<h3>Step 2: Enter your player names and ratings.</h3>
 					</div>
 					<label for="enterName">Enter player name</label>
 					<input type="text" class="form-control" id="enterName" placeholder="defaults to Player 1 etc..." />
@@ -73,7 +73,7 @@
 				<!--STEP THREE - GENERATE!-->
 				<div id="generator">
 					<div class="alert alert-danger" role="alert" id="stepThree">
-						<h2>Step 3: Generate squads (balanced to within 2 rating points)</h2>
+						<h3>Step 3: Generate squads (balanced to within 2 rating points)</h3>
 					</div>
 
 					<button id="generate" type="button" class="btn btn-primary" value="Generate Teams">Generate Teams</button>

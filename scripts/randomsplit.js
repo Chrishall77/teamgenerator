@@ -59,7 +59,6 @@
         poolSize = enterPoolSize.value;
         stepOne.className = "alert alert-warning";
         stepOne.textContent = "Squad Size: " + poolSize / 2 + " players.";
-        console.log(poolSize);
     })
 
     //handler for resetting to start
@@ -103,6 +102,7 @@
             teamSplitter();
         } else {
             remainers();
+            enterName.focus();
         }  
     })
 
@@ -198,13 +198,13 @@
         homeTeam.className = "col card bg-light border-dark";
         awayTeam.className = "col card bg-light border-dark";
         
-        populateSection(homeTeam, "H2", "Home Team");
+        populateSection(homeTeam, "H3", "Home Team");
         home.forEach((home)=>populateSection(homeTeam, "P", home.getName() + " / " + home.getRating() ));
-        populateSection(homeTeam, "H3", "Rating: " + homeScore)
+        populateSection(homeTeam, "H4", "Rating: " + homeScore)
         
-        populateSection(awayTeam, "H2", "Away Team");
+        populateSection(awayTeam, "H3", "Away Team");
         away.forEach((away)=>populateSection(awayTeam, "P", away.getName() + " / " + away.getRating() ));
-        populateSection(awayTeam, "H3", "Rating: " + awayScore);
+        populateSection(awayTeam, "H4", "Rating: " + awayScore);
 
         reset.focus();
     }
